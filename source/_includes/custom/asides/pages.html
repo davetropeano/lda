@@ -1,0 +1,10 @@
+<section>
+  <h1>Pages</h1>
+  <ul id="Pages">
+    {% for page in site.pages %}
+        <li class="page">
+            <a href="{{ root_url }}{{ page.url }}">{{ page.title }}</a>
+        </li>
+    {% endfor %}
+  </ul>
+</section>
