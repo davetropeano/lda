@@ -34,7 +34,8 @@ commerce sites, blogs and micro-blogs, music sites, video sites, social
 networking sites, government sites, news sites and so on.
 
 The basic idea of integration
-using Linked Data is that if you just substitute a data model (RDF) for HTML and otherwise
+using Linked Data is that if you just substitute a data model 
+([RDF](http://davetropeano.github.io/lda/what-is-this-rdf-thing/index.html)) for HTML and otherwise
 'make like the world-wide web', then applications can achieve the same sort of easy and
 limitless integration that we see in the HTML web.
 To achieve this goal, ones need to implement client applications that 'make like a browser'
@@ -60,20 +61,17 @@ The libraries simply make it easier to work with data from resources produced by
 The easiest way to get started with LDA is to download the framework from github as follows:
 
 1. Create a working directory:
-
-  ```sh
-  mkdir ldaprojects # pick your own name
-  cd ldaprojects
-  ```
-
+```sh
+mkdir ldaprojects # pick your own name
+cd ldaprojects
+```
 1. Clone the github repositories:
-
-  ```sh
-  git clone https://github.com/ibm/lda-clientlib.git
-  git clone https://github.com/ibm/lda-serverlib.git
-  git clone https://github.com/ibm/lda-siteserver.git
-  git clone https://github.com/ibm/lda-examples.git
-  ```
+```sh
+git clone https://github.com/davetropeano/lda-clientlib.git
+git clone https://github.com/davetropeano/lda-serverlib.git
+git clone https://github.com/davetropeano/lda-siteserver.git
+git clone https://github.com/davetropeano/lda-examples.git
+```
 
 The four github repositories are now available in the following subdirectories:
 
@@ -94,20 +92,20 @@ as well as an Nginx reverse proxy server, needed for some of the examples.
 
 Before you run the examples, you first need to download/install the following:
 
-1. Vagrant - http://docs.vagrantup.com/v2/installation/
-1. VirtualBox - https://www.virtualbox.org/wiki/Downloads
+1. [Vagrant](http://docs.vagrantup.com/v2/installation/)
+1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
    * Make sure you have a VirtualBox Host-Only Network (IP address 192.168.56.1)
 configured (see **Note 1**, below).
 
 Once Vagrant and VirtualBox are installed, execute the following commands:
 
 ```sh
-  cd lda-examples
-  vagrant up
+cd lda-examples
+vagrant up
 ```
 
 At this point the database server is running and ready for you to start playing with the
-[examples]().
+[examples](https://github.com/davetropeano/lda-examples).
 
 ### Note 1. Configure VirtualBox Host-Only Network (IP address 192.168.56.1)
 
@@ -115,14 +113,10 @@ On some machines, the following steps are necessary to configure VirtualBox to w
 correctly for SetupShop. This definitely seems to be needed on Mac, but (some?) Windows
 machines seem to have this automatically (pre)configured.
 
-    1. Start the VirtualBox app and select VirtualBox / Preferences...
-    2. Click the "Network" tab.
-    3. Click the "Add host-only network (Ins)" green plus button on the right to add
-       "vboxnet0" to the list of Host-only Networks.
-    4. Then click on the screwdriver icon on the right hand side to edit the vboxnet0
-       settings.
-    5. Accept the default IP address (192.168.56.1) settings on the Adapter tab.
-    6. Click on the DHCP Server tab.
-    7. Ensure that "Enable Server" is NOT checked on the DHCP Server tab. Then click "OK"
-       and "OK" to save the settings.
-
+1. Start the VirtualBox app and select VirtualBox / Preferences...
+2. Click the "Network" tab.
+3. Click the "Add host-only network (Ins)" green plus button on the right to add "vboxnet0" to the list of Host-only Networks.
+4. Then click on the screwdriver icon on the right hand side to edit the vboxnet0 settings.
+5. Accept the default IP address (192.168.56.1) settings on the Adapter tab.
+6. Click on the DHCP Server tab.
+7. Ensure that "Enable Server" is NOT checked on the DHCP Server tab. Then click "OK" and "OK" to save the settings.
