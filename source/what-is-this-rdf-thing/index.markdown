@@ -24,7 +24,7 @@ http://az.com/review_1 | http://www.amazon.com/review/RE9YX25OLHSY4/ref=cm_cr_pr
 http://az.com/review_2 | http://www.amazon.com/review/R1KU1SEX1ZJW74/ref=cm_cr_pr_perm?ie=UTF8&ASIN=B003MTTJOY&linkCode=&nodeID=&tag=
 http://az.com/product_1 | http://www.amazon.com/Edimax-EW-7811Un-Wireless-Adapter-Wizard/dp/B003MTTJOY/ref=cm_cr_pr_product_top
 
-If you asked programmers familiar with JSON to write down what http://az.com/review_1 would look like in JSON, they might write something like this:
+Now, what would http://az.com/review_1, for example, look like in JSON? A typical JSON programmers would probably suggest something like this:
 
 ```json
 {
