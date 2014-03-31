@@ -39,7 +39,7 @@ If you asked programmers familiar with JSON to write down what http://az.com/rev
 }
 ```
 
-*I am assuming that our programmer already understands and is following the REST model. A programmer following the rpc-over-http model would probably have provided database primary keys for reviewer and product, and would have expected clients to compose URLs by tacking the database primary key onto some URL string prefix, likely with a '?' in between and maybe an '=' for good luck.*
+*We are assuming that our programmer already understands and is following the REST model. A programmer following the rpc-over-http model would probably have provided database primary keys for reviewer and product, and would have expected clients to compose URLs by tacking the database primary key onto some URL string prefix, likely with a '?' in between and maybe an '=' for good luck.*
 
 It is hard to quarrel with the simplicity and intuitiveness of this JSON, and we will try not to spoil it as we convert it to RDF.
 
@@ -130,8 +130,8 @@ If we asked the same JSON programmer that we asked before to give us the JSON fo
 
 ```json
 [
-    http://az.com/review_1,
-    http://az.com/review_2,
+    "http://az.com/review_1",
+    "http://az.com/review_2",
     ...
 ]
 ```
@@ -207,8 +207,7 @@ representation, it must mean that they are members of the collection. Since we d
             "reviewer" : "http://az.com/reviewer_1",
             "reviewOf" : "http://az.com/product_1",
             "verified_purchase" : true,
-            "text" : "I purchased this to add wireless connectivity to my Raspberry Pi
-            [...]"
+            "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
         },
 
         {
@@ -253,7 +252,7 @@ Here are a couple of examples that will show you that even though RDF is very si
 ```json
 [
     {
-        "_subject": "http://martin- nally.name",
+        "_subject": "http://martin-nally.name",
         "givenName" : "Martin"
     },
     {
