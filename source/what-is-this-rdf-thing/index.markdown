@@ -14,7 +14,7 @@ One important thing to understand about RDF is that it is a data model, not a da
 
 ### RDF for JSON programmers - lesson 1
 
-Let's take the example of an on-line product review at Amazon.com. Since Amazon URLs are long and complicated and difficult to read (they should work on that), We're going to substitute them as follows:
+Let's take the example of an on-line product review at Amazon.com. Since Amazon URLs are long and complicated and difficult to read (they should work on that), we're going to substitute them as follows:
 
 Simplification | Real Amazon URL
 ---            | ---
@@ -290,6 +290,7 @@ Here is another example to challenge your object-oriented assumptions. Up above,
 This information corresponds to the following RDF table:
 
 Subject | Property | Value
+---     | ---      | ---
 http://az.com/review_1 | found_helpful | 180
 "" | found_helpful_or_not | 192
 "" | stars | 4
