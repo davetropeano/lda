@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://davetropeano.github.io/lda
+url: http://ld4apps.github.io
 title: Linked Data for Applications (LDA)
 subtitle: Resource Oriented Computing for Systems of Systems
 author: Your Name
@@ -16,7 +16,7 @@ description: This is the documentation home for the LDA project.
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /lda/atom.xml
+subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -26,10 +26,10 @@ email:
 # ----------------------- #
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /lda
+root: /
 permalink: /blog/:year/:month/:day/:title/
 source: source
-destination: public/lda
+destination: public
 plugins: plugins
 code_dir: downloads/code
 category_dir: blog/categories
@@ -63,7 +63,7 @@ default_asides: [custom/asides/pages.html, asides/recent_posts.html, asides/gith
 # ----------------------- #
 
 # Github repositories
-github_user: davetropeano
+github_user: ld4apps
 github_repo_count: 20
 github_show_profile_link: true
 github_skip_forks: true
