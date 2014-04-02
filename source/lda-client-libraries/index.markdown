@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "lda client libraries"
+title: "LDA Client Libraries"
 date: 2014-03-28 15:09
 comments: true
 sharing: true

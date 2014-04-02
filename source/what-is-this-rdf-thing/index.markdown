@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "what is this rdf thing?"
+title: "What is this RDF Thing?"
 date: 2014-03-28 15:46
 comments: true
 sharing: true
