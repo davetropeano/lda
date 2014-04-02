@@ -73,7 +73,7 @@ var onload_function = function() {
 window.addEventListener('DOMContentLoaded', onload_function, false)
 ```
 
-As you can see, the only difference is that instead of loading the single applications.html file, it consturcts and passes a simple type-to-file map, instucting the framework to load one of several (in this case 2) html files, depending on the (RDF) type of the resource being loaded. If the resource is a (todo) item, we load item.html to display the individual item. If the resource is a container, we load list.html to display the todo list iteself. This demonstrates the fundamental pattern that the LDA framework uses to implement [Single Page Applictions (SPAs)](http://ld4apps.github.io/lda-client-libraries/index.html). We'll look at the 'Todo List' implementation in more detail below.
+As you can see, the only difference is that instead of loading the single applications.html file, it constructs and passes a simple type-to-file map, instucting the framework to load one of several (in this case 2) html files, depending on the (RDF) type of the resource being loaded. If the resource is a (todo) item, we load item.html to display the individual item. If the resource is a container, we load list.html to display the todo list iteself. This demonstrates the fundamental pattern that the LDA framework uses to implement [Single Page Applictions (SPAs)](http://ld4apps.github.io/lda-client-libraries/index.html). We'll look at the 'Todo List' implementation in more detail below.
 
 The 'Todo List' sample includes a couple of other things you will need if you want to play with the software.
 
