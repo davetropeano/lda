@@ -24,7 +24,7 @@ http://az.com/review_1 | http://www.amazon.com/review/RE9YX25OLHSY4/ref=cm_cr_pr
 http://az.com/review_2 | http://www.amazon.com/review/R1KU1SEX1ZJW74/ref=cm_cr_pr_perm?ie=UTF8&ASIN=B003MTTJOY&linkCode=&nodeID=&tag=
 http://az.com/product_1 | http://www.amazon.com/Edimax-EW-7811Un-Wireless-Adapter-Wizard/dp/B003MTTJOY/ref=cm_cr_pr_product_top
 
-Now, what would http://az.com/review_1, for example, look like in JSON? A typical JSON programmers would probably suggest something like this:
+Now, what would http://az.com/review_1, for example, look like in JSON? A programmer familiar with JSON would probably suggest something like this:
 
 ```json
 {
@@ -56,7 +56,7 @@ reviewOf | http://az.com/product_1
 verified_purchase | true
 text | I purchased this to add wireless connectivity to my Raspberry Pi [...]
 
-It is clear this is a set of property-value pairs, but it is less clear what they are the property-values of. A JSON programmer would probably say that they are the values for the review whose representation this is. In other words, if you do a GET on the review http://az.com/review_1 then you can assume that the property values returned are the property values of http://az.com/review_1. Although this assumption sounds reasonable, it actually turns out to be a problem in more complex cases even for the native JSON programmer (see the next example), so we are going to remove this assumption by making the information explicit. We do this by adding a new JSON property, as follows.
+It is clear this is a set of property-value pairs, but it is less clear what they are the property-values of. Our JSON programmer would probably say that they are the values for the review whose representation this is. In other words, if you do a GET on the review http://az.com/review_1 then you can assume that the property values returned are the property values of http://az.com/review_1. Although this assumption sounds reasonable, it turns out to be a problem in more complex cases (see the next example) and implicit assumptions often turn into problems later, even in simple cases, so we are going to remove the assumption by making the information explicit. We do this by adding a new JSON property, as follows.
 
 ```json
 {
@@ -106,13 +106,13 @@ The key ideas that make RDF different from ordinary Javascript objects are these
   1. Simple Javascript objects contain property-value pairs, while RDF adds the information about whose property-value pairs they are (the 'subject', in RDF terminology)
   2. The subject of the property-value pairs is identified by a URI
 
-We will add a caution here. In its essence, RDF really is as simple as described above, but the fact that it is simple does not make it easy. It takes some time to really understand the implications of this simple model, and to unlearn false assumptions one is typically carrying over from an object-oriented way of thinking.
+We will add a caution here. In its essence, RDF really is as simple as described above, but the fact that it is simple does not make it easy. It takes some time to really understand the implications of this simple model, and to unlearn assumptions one is typically carrying over from an object-oriented way of thinking that do not apply in RDF.
 
-If our warning came too late and you have already done some Googling on RDF, let's relate this to what you might have seen. The three-column table above is a rendering of the standard RDF "graph of triples" - each row describes one triple. RDF calls sets of triples like these 'graphs', and the standard tutorial material usually emphasizes how you can match URL values in the left column with URL values in the right column to form a graph from the table. In our experience it's often more useful to think of a set of RDF triples as a simple table than as a graph. Also, there is a W3C recommendation called JSON-LD that specifies an 'approved' version of what we just did with _subject. Unfortunately, JSON-LD says you should use "@id" instead of "_subject", but since that choice is awkward to deal with in some programming languages (e.g. Javascript), and totally incompatible with some popular programming libraries, we don't recommend (or implement) spec compliance on this point. JSON-LD is a very large specification with many options - what we just did above is compatible with just one important option in the spec (if you ignore the details).
+If our warning came too late and you have already done some Googling on RDF, let's relate this to what you might have seen. The three-column table above is a rendering of the standard RDF "graph of triples" - each row describes one triple. RDF calls sets of triples like these 'graphs', and the standard tutorial material usually emphasizes how you can match URL values in the left column with URL values in the right column to form a graph (potentially multiple disconnected graphs) from the table. In our experience it's often more useful to think of a set of RDF triples as a simple table than as a graph. Also, there is a W3C recommendation called JSON-LD that specifies an 'approved' version of what we just did with "\_subject". Unfortunately, JSON-LD says you should use "@id" instead of "\_subject", but since that choice is awkward to deal with in some programming languages (e.g. Javascript), and incompatible with some popular programming libraries, we don't recommend (or implement) spec compliance on this point. JSON-LD is a large specification with many options - what we just did above is compatible with just one important option in the spec (if you ignore the details).
 
 *Those of you with sharp eyes for detail may have noticed a little irony in the RDF table above. In the first column we used "" to mean ditto to avoid repeating the long URL at the top of the column. However, "" could also be interpreted literally to mean the empty string, which is also a valid URL - it is the null relative URL - which happens to also be a correct URL value in this case, where the representation is the result of a GET on the longer url.*
 
-If you are not yet convinced that you should care about RDF. a reasonable reaction to the above discussion might be "OK, it makes sense, and it's not difficult to do, but really, I was doing fine without this, and I have more pressing problems to solve, so why would I care?". Let's try another example.
+You may not be convinced yet that you should care about RDF. A reasonable reaction to the above discussion might be "OK, it makes sense, and it's not difficult to do, but really, I was doing fine without this, and I have more pressing things to work on". Let's look at another example to try to convince you.
 
 ### RDF for JSON programmers - lesson 2
 
@@ -126,7 +126,7 @@ http://az.com/product_1/reviews
 
 *You would find this URL inside the representation of http://az.com/product_1 and you would not try to guess it by postpending 'review' to the stringified URL of the product.*
 
-If we asked the same JSON programmer that we asked before to give us the JSON for this collection of resources, you would probably get this:
+If we asked the same JSON programmer that we asked before to give us the JSON for this collection of resources, she might suggest this:
 
 ```json
 [
@@ -136,7 +136,7 @@ If we asked the same JSON programmer that we asked before to give us the JSON fo
 ]
 ```
 
-If the representation of a collection only contains the URLs of the collection's members, it's not very convenient for a client, because most use-cases will require the client to then fetch each member of the collection individually via HTTP GET. Even without input from us, our JSON programmer would probably be pushed by client colleagues to enhance the representation to be something more like this:
+If the representation of a collection only contains the URLs of the collection's members, it's not very convenient for a client, because most use-cases will require the client to then fetch each member of the collection individually via HTTP GET. Even without input from us, our JSON programmer would probably be pushed by her client colleagues to enhance the representation to be something more like this:
 
 ```json
 [
@@ -170,7 +170,7 @@ If the representation of a collection only contains the URLs of the collection's
 
 Notice that our programmer had to invent "_subject" (or some synonym for that concept) for this case - even without having seen our first RDF lesson - because the outer context can no longer be depended on to know what resources the information pertains to. This means that the programmer was already using a homemade form of RDF, but had not formalized it and was not doing it consistently. What we have found is that there are many cases like this where a common design issue in JSON has a very natural solution when you view things from an RDF perspective. Taking advantage of the work that has been done by a community of smart people to formalize the RDF model helps architects with overall design integrity, at the cost of having to read and decode the RDF literature. Alternatively, you can build on the LDA framework and have a lot of it done for you <g>.
 
-Even though each entry already has a '_subject', we are still relying on context to convey implicit information in this example - there is nothing in the data that tells us that these reviews are the members of the collection. Here is the table of triples that can be derived from the data as it currently appears:
+Even though each entry already has a '_subject', we are still relying on context to convey another piece of implicit information in this example - there is nothing in the data that tells us that these reviews are the members of the collection. Here is the table of triples that can be derived from the data as it currently appears:
 
 Subject | Property | Value
 ---     | ---      | ---
@@ -239,7 +239,7 @@ Now we have triples that declare explicitly which resources are the members rath
 
 *Note that the _subject JSON property of the reviews is playing double-duty here - it is defining the subject of the property-values within the nested JSON objects for the reviews, and it is defining the values of the 'member' property for the outer JSON object that represents the collection.*
 
-In this example, we forced the programmer to complicate the representation of the collection with an extra level of nesting. However, it's quite likely that would have needed to be done anyway. Suppose for example, that we decide to record other information for the collection, like the time of the last update, or the number of entries - there are many plausible property values for a collection. The simplest way of adding these properties is to organize the data the way we have shown.
+In this example, we forced the programmer to complicate the representation of the collection with an extra level of nesting. However, it's quite likely that she would have needed to be done anyway. Suppose for example, that we decide to record other information for the collection, like the time of the last update, or the number of entries - there are many plausible property values for a collection. The simplest way of adding these properties is to organize the data the way we have shown.
 
 Hopefully we have convinced you that our conversion to the RDF data model has preserved the simplicity and intuitiveness of the JSON a programmer originally came up with and that the changes we imposed were pretty desirable ones anyway.
 
@@ -314,9 +314,9 @@ http://az.com/product_1 | reviewedIn | http://az.com/review_1
 
 All we did was reverse the direction of the triple - instead of saying "review_1 is a review of product_1", we reversed it to say "product_1 is reviewed in review_1". This information is still held in the representation of the review, not the product, and the information is entirely equivalent - all we did was change the way we stated it.
 
-Although this change was trivial and inconsequential at the RDF level, it is now more complicated to put this information back into a JSON format - try it. *Hint - the representation of each review will become more complex - you will need two JSON objects instead of one to hold the information, but - surprisingly - the representation of the collection http://az.com/product_1/reviews magically becomes simpler - we no longer have to invent membership triples.*
+Although this change was trivial and inconsequential at the RDF level, it is now more complicated to put this information back into a JSON format - try it. *Hint - the representation of each review will become more complex - you will need two JSON objects instead of one to hold the information, but - surprisingly - the representation of the collection http://az.com/product_1/reviews becomes simpler - we no longer have to invent membership triples.*
 
-RDF also allows us to correct a conceptual problem with the data in the original example. The properties 'found_helpful' and 'found_helpful_or_not' are clearly properties of the review - they are trying to indicate how good the review is. However 'stars' is not really a property of the review at all - it's trying to say how good the product is, not how good the review is. As a human who speaks English, we can use common sense to figure this out, but if a machine tried, or if the example had been done in a language we don't know, it couldn't be figured out. RDF gives us an easy way to correct this, by changing the table for the review to this:
+RDF also allows us to correct a conceptual problem with the data in the original example. The properties 'found_helpful' and 'found_helpful_or_not' are clearly properties of the review - they are trying to indicate how good the review is. However 'stars' is not a property of the review at all - it's trying to say how good the product is, not how good the review is. As humans who speak English, we can use common sense to figure this out, but a computer (other than IBM's Watson, perhaps) can't figure it out, and if the example had been done in a language I didn't know, I couldn't figure it out either. RDF gives us an easy way to correct this, by changing the table for the review to this:
 
 Subject | Property | Value
 ---     | ----     | ---
@@ -366,26 +366,26 @@ When we introduced the '_subject' JSON property above, we emphasized that it is 
 }
 ```
 
-With our more liberal version of RDF/JSON (The specification in the W3C note does not allow the values of properties to be simple strings and numbers as shown here - they have to be structures. This makes programming tedious, so our implementation is more liberal), instead of introducing '_subject', you do this:
+With [our slightly more liberal version of] RDF/JSON , instead of introducing '_subject', you do this:
 
 ```json
 {
     "http://az.com/review_1": {
-    "found_helpful" : 180,
-    "found_helpful_or_not" :192,
-    "stars" : 4,
-    "title" : "Good little Wifi Adapter",
-    "reviewer" : "http://az.com/reviewer_1",
-    "reviewOf" : "http://az.com/product_1",
-    "verified_purchase" : true,
-    "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
+        "found_helpful" : 180,
+        "found_helpful_or_not" :192,
+        "stars" : 4,
+        "title" : "Good little Wifi Adapter",
+        "reviewer" : "http://az.com/reviewer_1",
+        "reviewOf" : "http://az.com/product_1",
+        "verified_purchase" : true,
+        "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
     }
 }
 ```
 
 The JSON 'names' at the outer level are not property names, they are the URLs of the subjects of the property/value pairs in the inner objects.
 
-With RDF/JSON, you do not nest additional JSON objects the way we saw before with the JSON-LD-inspired format. If you take our container example from above, it could look like the following in RDF/JSON. [Note this differs in some details from what we do in LDA framework - we'll show you what we really do later.]
+With RDF/JSON, you do not nest additional JSON objects the way we saw before with the JSON-LD-inspired format. If you take our container example from above, it would look something like the following in RDF/JSON. [Note this differs in some details from what we do in LDA framework - we'll show you what we really do later.]
 
 ```json
 {
