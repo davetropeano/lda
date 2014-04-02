@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "LDA - Linked Data For Applications"
+title: "Getting Started"
 date: 2014-03-28 09:04
 comments: true
 sharing: true
