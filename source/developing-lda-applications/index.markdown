@@ -1,12 +1,12 @@
 ---
 layout: page
 title: "Developing LDA Applications"
-date: 2014-04-02 11:22
+date: 2014-04-02 13:45
 comments: true
 sharing: true
 footer: true
 ---
-As with most technologies, the easiest way to get started is to look at a example. To help you get an idea of how LDA applications are implemented, we'll start with a very simple 'Todo List' application from the [lda-examples](https://github.com/ld4apps/lda-examples) repository. You should be able to understand the framework just by reading, but you might also like to install the software yourself and follow along in a more hands-on fashion. If so, refer to [Getting Started](http://ld4apps.github.io/getting-started/index.html) before proceeding.
+As with most technologies, the easiest way to get started is to look at an example. To help you get an idea of how LDA applications are implemented, we'll start with a very simple 'Todo List' application from the [lda-examples](https://github.com/ld4apps/lda-examples) repository. You should be able to understand the framework just by reading, but you might also like to install the software yourself and follow along in a more hands-on fashion. If so, refer to [Getting Started](http://ld4apps.github.io/getting-started/index.html) before proceeding.
 
 Every LDA-based application requires a minimum of two files:
 
@@ -73,9 +73,9 @@ var onload_function = function() {
 window.addEventListener('DOMContentLoaded', onload_function, false)
 ```
 
-As you can see, the only difference is that instead of loading the single applications.html file, it consturcts and passes a simple type-to-file map, instucting the framework to load one of several (in this case 2) html files, depending on the (RDF) type of the resource being loaded. If the resource is a (todo) item, we load item.html to display the individual item. If the resource is a container, we load list.html to display the todo list iteself. This demonstrates the fundamental pattern that the LDA framework uses to implement [Single Page Applictions (SPAs)](http://ld4apps.github.io/lda-client-libraries/index.html). We'll look at the 'Todo List' implementation in more detail below.
+As you can see, the only difference is that instead of loading the single applications.html file, it consturcts and passes a simple type-to-file map, instucting the framework to load one of several (in this case 2) html files, depending on the (RDF) type of the resource being loaded. If the resource is a (todo) item, we load item.html to display the individual item. If the resource is a container, we load list.html to display the todo list iteself. This demonstrates the fundamental pattern that the LDA framework uses to implement [Single Page Applictions (SPAs)](http://ld4apps.github.io/lda-client-libraries/index.html). We'll look at the 'Todo List' client implementation in more detail below.
 
-The 'Todo List' sample includes a couple of other things you will need if you want to play with the software.
+The 'Todo List' sample includes a couple of other things any LDA application typically needs:
 
   1. A setup.py file - You can execute this server file with Python to download the python dependencies of the framework. [We do our best to minimize dependencies, but we do have a few. Currently they are: requests, webob, pycrypto, pymongo, isodate, python-dateutil, rdflib, and werkzeug. requests and webob are popular python libraries that implement functions for sending http requests and reading data from http inputs. pycrypto is a cryptography library that is only required if you are using the authentication feature. pymongo is the python client library for MongoDB. isodate and python-dateutil provide methods to help with Date formatting and parsing. rdflib allows us to support a broad range of RDF data formats without any work on the application developer's part. werkzeug is only used in the single-application development environment, and then only to serve static files.]
 
@@ -83,25 +83,81 @@ The 'Todo List' sample includes a couple of other things you will need if you wa
 
 ## Hands-on
 
-We will now go through a simple demo using the browser console to add and display todo items.
+We will now go through a simple demo using a browser to add and display todo items.
 
-The first thing to do is run the application in a command/shell window:
+The first thing to do is run the todo application server in a command/shell window:
 
-![](images/image11.png)
+![](images/run.png)
 
-localhost:3007/x \- where x is any simple path segment - is the name of a container to which you can POST to create new resources, and which you can GET to see what you already have. [Of course, you can override all this default behavior if you want by writing Python code.] If you POST to localhost:3007/x, it will create a resource whose URL is localhost:3007/x/n.m, where n is the numerical id of the server copy that handles the request (a small monotonically-increasing number) and m is the numerical id of the resource (another monotonically-increasing number). Clients do not need to know this information - for them URLs should be opaque and anyway we may choose to change these rules on the server - but you as a server developer using the framework may be interested.
+At this point, you can go to a browser and enter the address "localhost:3007/items". In the browser you will see something like this:
 
-At this point, you can go to a browser and enter the address "localhost:3007/tt".
+![](images/list1.png)
 
-[tt is just the value of x we will use for this example - you can enter "localhost:3007/x" where x is anything you fancy. Normally you would be running behind a reverse proxy that is configured to only forward the values of x that you have chosen for your subsystems, but here we are running wide- open in development so you can enter anything.]
+You can add todo entries to the list by entering them in the text field and pressing the 'Add Todo Item' button:
 
-In the browser you will see the following:
+![](images/list2.png)
 
-![](images/image15.png)
+Notice that each entry added to the list is also a clickable link. If you click on the first entry in the list you will see a (less than user-freindly) representation of that entry:
 
-The reason you see this text is that the application.html file currently looks like this:
+![](images/item1.png)
 
-![](images/image16.png)
+So, how is this application working? Let's start by looking at the html file that is loaded when we're looking at the todo list itself (that's lda-examples/todo/wsgi/static/todo/list.html, if you're looking at the project source):
+
+```html
+<input type="text" id="item" name="item" placeholder="What do you need to do?" style="width: 200px;">
+<input type="button" value="Add Todo Item" onClick="addItem();">
+
+<hr>
+
+<div id="todoItems"></div>
+<hr>
+
+<script>
+function appendItem(item, location) {
+    document.getElementById("todoItems").innerHTML += "<li><a href=\"" + location + "\">" + item + "</a></li>"
+}
+
+function displayItems() {
+    var items = APPLICATION_ENVIRON.initial_simple_jso.bp_members
+    for (var i in items) {
+        appendItem(items[i].dc_title, items[i]._subject);
+    }
+}
+
+function addItem() {
+    var title = document.getElementById("item").value.trim();
+    if (title == '') return;
+
+    var item = {
+        "_subject": "",
+        "dc_title": title,
+        "rdf_type": "http://example.org/todo#Item"
+    };
+
+    var response = ld_util.send_create("", item);
+    if (response.status == 201) {
+        var location = response.getResponseHeader("location");
+        appendItem(item.dc_title, location);
+        document.getElementById("item").value = "";
+    }
+    else
+        console.log(response);
+}
+
+// allow enter key to be pressed and act as submit
+document.getElementById('item').onkeydown = function(e) {
+    e = e || window.event;
+    if (e.keyCode == 13) {
+        addItem();
+    }
+};
+
+
+displayItems();
+</script>
+```
+
+For anyone familiar with html/javascript programming, there should be nothing surprising here. This is very simple UI, intentionally written to use no fancy UI frameworks/libraries, other than the LDA clientlib. We have other samples that use UI frameworks to provide much nicer displays, but here we kept the example as simple as absolutely possible.
 
 However, if you look at the source of the page, you will see this:
 
@@ -112,6 +168,12 @@ This will be surprising to many HTML programmers. The HTML contains an RDFa repr
 [If you turn off javascript in the browser, you will actually see the RDFa rendered. There is also an environment variable you can set on the server that will generate more elaborate RDFa that actually does render itself in a more readable way if Javascript is off. This will not give you a reasonable UI for your application, but it can be useful/amusing for debugging or pedagogical purposes.]
 
 Why do we do things this way? This approach allows a very clean separation of the server, which concerns itself only with business logic and data storage, and the user interface, which is implemented in HTML and javascript and which does not even have to reside on the same server as the business logic (we have run with the UI files on Amazon S3, for example).
+
+localhost:3007/x \- where x is any simple path segment - is the name of a container to which you can POST to create new resources, and which you can GET to see what you already have. [Of course, you can override all this default behavior if you want by writing Python code.] If you POST to localhost:3007/x, it will create a resource whose URL is localhost:3007/x/n.m, where n is the numerical id of the server copy that handles the request (a small monotonically-increasing number) and m is the numerical id of the resource (another monotonically-increasing number). Clients do not need to know this information - for them URLs should be opaque and anyway we may choose to change these rules on the server - but you as a server developer using the framework may be interested.
+
+['items' is just the value of x we will use for the todo example - you can actually enter "localhost:3007/x" where x is anything you fancy. Normally you would be running behind a reverse proxy that is configured to only forward the values of x that you have chosen for your subsystems, but here we are running wide- open in development so you can enter anything.]
+
+
 
 ### Customizing the UI
 
