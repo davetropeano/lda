@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Getting Started"
+title: "Introduction"
 date: 2014-03-28 09:04
 comments: true
 sharing: true
