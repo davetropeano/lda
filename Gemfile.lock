@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    RedCloth (4.2.9-x86-mingw32)
+    RedCloth (4.2.9)
     chunky_png (1.3.0)
     classifier (1.3.4)
       fast-stemmer (>= 1.0.0)
@@ -43,10 +43,10 @@ GEM
       tilt (~> 1.3, >= 1.3.4)
     stringex (1.4.0)
     tilt (1.4.1)
-    yajl-ruby (1.1.0-x86-mingw32)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
-  x86-mingw32
+  ruby
 
 DEPENDENCIES
   RedCloth (~> 4.2.9)
