@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Introduction"
+title: "Welcome to LDA"
 date: 2014-03-28 09:04
 comments: true
 sharing: true
@@ -55,3 +55,29 @@ LDA's client component consists of Javascript libraries containing helper method
 for various common tasks. There is almost no framework code on the client - you can write
 your clients using whatever Javascript frameworks you like and still use the LDA libraries.
 The libraries simply make it easier to work with data from resources produced by LDA-based servers.
+
+## Getting Started
+
+The best way to get started with LDA is by downloading the framework and example repositories
+from github and then running the 'Todo Sample' and its corresponding tutorial. 
+
+* [Downloading the Software](/downloading-the-software/index.html)
+* [Developing LDA Applications](/developing-lda-applications/index.html)
+
+Once you understand the 'Todo Sample', you should have a pretty good understanding of how
+a basic LDA application functions. If you then look at (and run) the rest of the examples,
+you'll start to see the kinds of things that are possible with LDA and how
+flexible and open it is wrt. UI programming style.
+
+There are also a number of resources that you may want to read to get a better understanding
+of the architecture and patterns that LDA is encouraging and why.
+
+* [LDA Client Libraries](/lda-client-libraries/index.html)
+* [LDA Server Libraries](/lda-server-libraries/index.html)
+* [What Is This RDF Thing](/what-is-this-rdf-thing/index.html)
+* More to come ...
+
+You can contact us, ask questions, get involved, etc., by posting github issues or asking question on Stack Overflow ...
+
+
+
