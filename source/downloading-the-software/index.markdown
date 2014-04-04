@@ -28,7 +28,7 @@ The four github repositories should now be in the following subdirectories:
 1. [lda-siteserver](https://github.com/ld4apps/lda-siteserver/) - standard system functions for LDA applications - authentication, access control and multi-tenancy
 1. [lda-examples](https://github.com/ld4apps/lda-examples/) - LDA example applications
 
-There are several [sample application](https://github.com/ld4apps/lda-examples/blob/master/README.md)
+There are several [sample applications](https://github.com/ld4apps/lda-examples/blob/master/README.md)
 in the lda-examples repository you can look at and run.
 Note that the 4 repositories must be downloaded in sibling directories, as instructed above, in
 order to run the examples.
@@ -61,8 +61,8 @@ You should now be able to run the 'Todo Sample' in the
 
 ### Using Vagrant to start MongoDB and Nginx
 
-If you plan to do more with LDA (for example, run all the examples, and start to play with it
-yourself) ather than installing and running MongoDB, the 
+If you plan to do more with LDA (for example, run all the examples and start to play with it
+yourself), rather than installing and running MongoDB, the 
 [lda-examples](https://github.com/ld4apps/lda-examples) repository includes
 a Vagrantfile that can be used to start a MongoDB server as well as a properly configured
 Nginx reverse proxy server.
