@@ -7,24 +7,22 @@ sharing: true
 footer: true
 ---
 LDA is a light-weight framework that helps developers design and implement integrated
-systems composed of multiple applications that follow a REST model and can be deployed
-on clouds. An LDA-based application is a run-time subsystem whose communication with the
-outside world is entirely through HTTP/REST. This means that the applications
-(REST subsystems) cannot see each other directly. They can only see the resources they
+systems - for example web-sites - that are composed of multiple applications and can be easily deployed
+on clouds. An LDA-based application is a run-time component whose communication with the
+outside world is entirely through HTTP/REST - LDA applications communicate with each other by accessing the resources they
 expose.
 
-The problem LDA is solving is not implementing individual applications - there are
-lots of technologies for that - but rather implementing a coherent system made up of
-many applications that talk to each other. Two other common approaches for solving
+LDA helps you implement applications, but LDA is not focused on individual applications - there are
+lots of technologies for that - LDA targets coherent systems made up of
+multiple applications that talk to each other. Two other common approaches for solving
 this problem, a 'central repository' approach and one that in recent years
-has come to be called 'SOA', have major scalability issues that we believe the LDA
-approach completely overcomes.
+has come to be called 'SOA', have scalability issues that we believe the LDA
+approach overcomes.
 
 The basic idea behind the use of Linked Data for integration is simple.
 We have seen that the regular HTML web is an extraordinary integrator.
 By embedding links - usually HTML anchor tags - inside pages, HTML
-enables the user of a browser to navigate to other pages without modifying
-those pages or constraining in any way how those pages are implemented - they
+enables the user of a browser to navigate to other pages without constraining in any way how those pages are implemented - they
 don't even have to be HTML. This integration does not require any sort of
 coordination or contract between the owners of the referenced pages and the
 owner of the page that references them, except perhaps to demand that the URLs
@@ -38,7 +36,7 @@ using Linked Data is that if you just substitute a data model
 ([RDF](http://davetropeano.github.io/lda/what-is-this-rdf-thing/index.html)) for HTML and otherwise
 'make like the world-wide web', then applications can achieve the same sort of easy and
 limitless integration that we see in the HTML web.
-To achieve this goal, ones need to implement client applications that 'make like a browser'
+For this to work, we need to implement client applications that 'make like a browser'
 and server applications that expose everything as linked resources. The LDA
 framework provides server-side and a client-side components that make it easy to
 create applications that follow exactly that pattern.
