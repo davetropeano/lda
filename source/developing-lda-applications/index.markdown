@@ -267,7 +267,7 @@ In case you're curious, here is the implementation code for this view (in *lda-e
 ```
 
 This is simply calling a convience method, in the *utils.js* clientlib, that returns a nicely formatted representation of 
-of the 'simple JSO' in APPLICATION_ENVIRON.initial_simple_jso.
+the 'simple JSO' in APPLICATION_ENVIRON.initial_simple_jso.
 
 ### Creating (POSTing) Resources
 
