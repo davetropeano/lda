@@ -52,12 +52,12 @@ As you can see, what this code basically does is load the LDA *utils.js* client 
 If you look at the 'Todo List' application's version of *application.js*, you'll notice that it is slightly more complicated than the simplest 'standard' one above. It looks like this:
 
 ```javascript
-BP = 'http://open-services.net/ns/basicProfile#'
+LDP = 'http://www.w3.org/ns/ldp#'
 TD = 'http://example.org/todo#'
 
 var onload_function = function() {
     var type_to_theme_map = {}
-    type_to_theme_map[BP+'Container'] = '/todo/list.html'
+    type_to_theme_map[LDP+'DirectContainer'] = '/todo/list.html'
     type_to_theme_map[TD+'Item'] = '/todo/item.html'
 
     var head  = document.getElementsByTagName('head')[0]
@@ -176,7 +176,7 @@ function appendItem(item, location) {
 }
 
 function displayItems() {
-    var items = APPLICATION_ENVIRON.initial_simple_jso.bp_members
+    var items = APPLICATION_ENVIRON.initial_simple_jso.ldp_containsmembers
     for (var i in items) {
         appendItem(items[i].dc_title, items[i]._subject);
     }
@@ -216,9 +216,9 @@ displayItems();
 
 For anyone familiar with html/javascript programming, there should be nothing surprising here. This is a very simple UI, intentionally written using no fancy UI frameworks/libraries other than the LDA clientlib. We have other samples that use UI frameworks to provide much nicer displays, but here we kept the example as simple as absolutely possible.
 
-From an 'understanding LDA' perspective, the interesting parts are the two Javascript functions, *displayItems()* and *addItems()* on lines 12 and 19 respectively. As you can see, *displayItems()*, which is called when a resource of type http://open-services.net/ns/basicProfile#Container (see application.js in previous section) is initially loaded, iterates over and displays the list of items that are found in something called APPLICATION_ENVIRON.initial_simple_jso.bp_members. Where did that come from, you ask? 
+From an 'understanding LDA' perspective, the interesting parts are the two Javascript functions, *displayItems()* and *addItems()* on lines 12 and 19 respectively. As you can see, *displayItems()*, which is called when a resource of type http://open-services.net/ns/basicProfile#Container (see application.js in previous section) is initially loaded, iterates over and displays the list of items that are found in something called APPLICATION_ENVIRON.initial_simple_jso.ldp_contains. Where did that come from, you ask? 
 
-Recall that when *application.js* ran, it loaded the lda-clientlib utility library, *utils.js*, and then called an onload function in that library. The RDFa content in the HTML representation of the resource holds important information, but not in a format that is very friendly to Javascript programmers, so the utility onload function converts it to more usable Javascript objects in memory - a simple RDF format we refer to as 'simple JSO' (JSO stands for JavaScript Objects, as in JSON, but without the N for Notation part) - which it then sets as a property called initial_simple_jso in a global variable called APPLICATION_ENVIRON. In this example, the 'simple JSO' is that of an RDF container type (bp_Container) whose members are exposed in a field named 'bp_members'.
+Recall that when *application.js* ran, it loaded the lda-clientlib utility library, *utils.js*, and then called an onload function in that library. The RDFa content in the HTML representation of the resource holds important information, but not in a format that is very friendly to Javascript programmers, so the utility onload function converts it to more usable Javascript objects in memory - a simple RDF format we refer to as 'simple JSO' (JSO stands for JavaScript Objects, as in JSON, but without the N for Notation part) - which it then sets as a property called initial_simple_jso in a global variable called APPLICATION_ENVIRON. In this example, the 'simple JSO' is that of an RDF container type (bp_Container) whose members are exposed in a field named 'ldp_contains'.
 
 To understand the representation of an actual item in the todo list, let's take a closer look at the *addItem()* function from *list.html*:
 
@@ -298,17 +298,17 @@ Fortunately the alternative is very simple. You can execute these two statements
 
 ```javascript
 response = ld_util.send_create('', {
-    _subject : '',
-    rdf_type : new rdf_util.URI('http://open-services.net/ns/basicProfile#Container'),
-    bp_membershipPredicate: 'items1',
-    bp_membershipSubject: new rdf_util.URI('http://localhost:3007/')}
+    _subject: '',
+    rdf_type: new rdf_util.URI('http://www.w3.org/ns/ldp#DirectContainer'),
+    ldp_hasMemberRelation: 'items1',
+    ldp_membershipResource: new rdf_util.URI('http://localhost:3007/')}
 )
 
 response = ld_util.send_create('', {
     _subject: '',
-    rdf_type: new rdf_util.URI('http://open-services.net/ns/basicProfile#Container'),
-    bp_membershipPredicate: 'items2',
-    bp_membershipSubject: new rdf_util.URI('http://localhost:3007/')}
+    rdf_type: new rdf_util.URI('http://www.w3.org/ns/ldp#DirectContainer'),
+    ldp_hasMemberRelation: 'items2',
+    ldp_membershipResource: new rdf_util.URI('http://localhost:3007/')}
 )
 ```
 
