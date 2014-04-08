@@ -176,7 +176,7 @@ function appendItem(item, location) {
 }
 
 function displayItems() {
-    var items = APPLICATION_ENVIRON.initial_simple_jso.ldp_containsmembers
+    var items = APPLICATION_ENVIRON.initial_simple_jso.ldp_contains
     for (var i in items) {
         appendItem(items[i].dc_title, items[i]._subject);
     }
@@ -218,7 +218,7 @@ For anyone familiar with html/javascript programming, there should be nothing su
 
 From an 'understanding LDA' perspective, the interesting parts are the two Javascript functions, *displayItems()* and *addItems()* on lines 12 and 19 respectively. As you can see, *displayItems()*, which is called when a resource of type http://open-services.net/ns/basicProfile#Container (see application.js in previous section) is initially loaded, iterates over and displays the list of items that are found in something called APPLICATION_ENVIRON.initial_simple_jso.ldp_contains. Where did that come from, you ask? 
 
-Recall that when *application.js* ran, it loaded the lda-clientlib utility library, *utils.js*, and then called an onload function in that library. The RDFa content in the HTML representation of the resource holds important information, but not in a format that is very friendly to Javascript programmers, so the utility onload function converts it to more usable Javascript objects in memory - a simple RDF format we refer to as 'simple JSO' (JSO stands for JavaScript Objects, as in JSON, but without the N for Notation part) - which it then sets as a property called initial_simple_jso in a global variable called APPLICATION_ENVIRON. In this example, the 'simple JSO' is that of an RDF container type (bp_Container) whose members are exposed in a field named 'ldp_contains'.
+Recall that when *application.js* ran, it loaded the lda-clientlib utility library, *utils.js*, and then called an onload function in that library. The RDFa content in the HTML representation of the resource holds important information, but not in a format that is very friendly to Javascript programmers, so the utility onload function converts it to more usable Javascript objects in memory - a simple RDF format we refer to as 'simple JSO' (JSO stands for JavaScript Objects, as in JSON, but without the N for Notation part) - which it then sets as a property called initial_simple_jso in a global variable called APPLICATION_ENVIRON. In this example, the 'simple JSO' is that of an RDF container type (ldp_DirectContainer) whose members are exposed in a field named 'ldp_contains'.
 
 To understand the representation of an actual item in the todo list, let's take a closer look at the *addItem()* function from *list.html*:
 
