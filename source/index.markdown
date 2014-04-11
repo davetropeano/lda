@@ -12,7 +12,7 @@ on clouds.
 
 LDA helps you implement applications, but LDA's primary purpose is not implementing individual applications - there are
 lots of technologies for that - rather LDA helps implement coherent systems made up of
-multiple applications that talk to each other. LDA applications are system components that communicate entirely through HTTP/REST insterfaces.
+multiple applications that talk to each other. LDA applications are system components that communicate entirely through HTTP/REST interfaces.
 Two other common approaches for integrating applications, the 'central repository' approach and the one that in recent years
 has come to be called 'SOA', have problems that we believe the LDA approach overcomes.
 
