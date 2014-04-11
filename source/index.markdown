@@ -28,13 +28,16 @@ commerce sites, blogs and micro-blogs, music sites, video sites, social
 networking sites, government sites, news sites and so on.
 
 The basic idea of Linked Data is that if you just substitute a data model 
-([RDF](http://davetropeano.github.io/lda/what-is-this-rdf-thing/index.html)) for HTML and otherwise
+([RDF](/what-is-this-rdf-thing/index.html)) for HTML and otherwise
 'make like the world-wide web', then applications can achieve the same sort of easy and
 limitless integration of data that we see for user interface in the HTML web.
 For this to work, we need to implement client applications that 'make like a browser'
 and server applications that expose everything as hypertext-linked resources. The LDA
 framework provides server-side and a client-side components that make it easy to
 create applications that follow exactly that pattern.
+
+In addition to using long-standing technologies like HTML and RDF, LDA implements (parts of) newer specifications like the 
+[Linked Data Platform](http://www.w3.org/TR/ldp/).
 
 The server-side component is written in Python,
 about 75% of which would need to be ported to other languages to support application development in
