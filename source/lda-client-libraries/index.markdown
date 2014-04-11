@@ -76,7 +76,7 @@ As you can see, the SPA implementation is included by reference using the follow
 
 The entire implementation of the SPA is in /setupshop/application.js, which happens to be on the same server as the resource itself in this case, but could actually be anywhere on the web.
 
-You might imagine from this that the implementation of our SPA is entirely in Javascript code. We implement it this way, but that has at least two disadvantages:
+You might imagine from this that the implementation of our SPA is entirely in Javascript code. We could have implement it this way, but that has at least two disadvantages:
 
   1. Developers are used to implementing UI in HTML files
   2. UI implemented in HTML files is easier for 3rd-parties to inspect and learn from
