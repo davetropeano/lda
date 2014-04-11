@@ -10,6 +10,19 @@ The following diagram attempts to explain the overall structure of the framework
 
 ![](images/image12.png)
 
+### Your Business Logic
+
+If you don't put any business logic in your server, you will still have a fully-functioning application that will store RDF entities that are POSTed, and respond to GET, PATCH and DELETE in the manner you would expect. [PUT is not supported - PUT is good for documents, but not a good match for RDF entities.] You have in effect a 'generic' CRUD application for arbitrary RDF resources.
+
+The most common kind of custom business logic does the following things:
+
+  1. Implementation of validation of inputs on POST and PATCH
+  2. Implementation of side-effects of POST and PATCH
+  3. Addition of 'calculated' properties to entities, usually on GET, but also on POST and PATCH 
+  4. Construction of 'calculated' entities on GET
+
+One of the most important types of 'calculated entities' is list. Suppose in your data you have Carts and Items, and you record which items are in which shopping carts. One natural way to record this in the database is with a triple of the form 'itemURL is-in cartURL'. This triple is most likely stored with the item. If this was all you did, clients would have to remember to include this triple every time they created an item, and clients would have to issue a database query to find all the items in a cart. While this would work, it is not very convenient. It would be more convenient if, for every cart whose url is U, there were a 'container' resource whose url was U2 whose meaning was 'the items in U'. A GET on this resource would return the list of items (including their properties) and a POST to this resource would create a new item for the cart. The 'container' hides the detail of the query that must be executed as part of a GET. You would also want there to be a property of the resource at U that has the value of U2 so that you don't have to guess that URL. The 'Standard Business Logic' library has helper methods that let you create U2 and the property of U that references it with a single line of code.
+  
 ### Standard WSGi Server
 
 The 'Standard WSGi Server' code of the framework has the following functions:
@@ -30,7 +43,7 @@ The job of the business logic layer is to implement the CRUD+transform+action me
   3. Taking a DELETE request from the WSGi server and translating it into a delete of a single entity on the storage system.
   4. Taking a PATCH request from the WSGi server and translating it into an update of an entity on the storage system. The representation of the to-be-created resource is RDF
   5. Taking a transform (POST) request from the WSGi server and translating it into query on the storage system. The representation of the query resource is structured like RDF/JSON with some tweaks (see the section on query) and the result is pure RDF.
-  6. Providing a default implementation of 'virtual' container resources that are calculated from queries. This includes the ability to POST to these resources as well as to GET them. It also includes augmenting the representation of other resources to point to these virtual resources. (Note to self - should this not be in a library that can be used without having to subclass?)
+  6. Providing a default implementation of 'calculated' container resources that are constructed from queries. This includes the ability to POST to these resources as well as to GET them. It also includes augmenting the representation of other resources to point to these virtual resources.
   7. Augmenting each resource with a reference to a 'virtual' container that lists the historic versions of the resource.
 
 The Standard Business Logic Server is also not big - it is under 650 lines - although would be a couple of times bigger if it were refined to commercial quality.
