@@ -32,7 +32,7 @@ The basic idea of Linked Data is that if you just substitute a data model
 'make like the world-wide web', then applications can achieve the same sort of easy and
 limitless integration of data that we see for user interface in the HTML web.
 For this to work, we need to implement client applications that 'make like a browser'
-and server applications that expose everything as hypertext-linked resources. The LDA
+and server applications that expose all data as hypertext-linked resources. The LDA
 framework provides server-side and a client-side components that make it easy to
 create applications that follow exactly that pattern.
 
