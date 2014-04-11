@@ -12,7 +12,7 @@ The following diagram attempts to explain the overall structure of the framework
 
 ### Your Business Logic
 
-If you don't put any business logic in your server, you will still have a fully-functioning application that will store RDF entities that are POSTed, and respond to GET, PATCH and DELETE in the manner you would expect. [PUT is not supported - PUT is good for documents, but not a good match for RDF entities.] You have in effect a 'generic' CRUD application for arbitrary RDF resources.
+If you don't put any business logic in your server, you will still have a fully-functioning application that will store RDF entities that are POSTed, and respond to GET, PATCH and DELETE in the manner you would expect. [PUT is not supported - PUT is good for documents, but not a good match for data resources.] You have in effect a 'generic' CRUD application for arbitrary RDF resources.
 
 The most common kind of custom business logic does the following things:
 
