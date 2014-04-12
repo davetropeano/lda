@@ -99,7 +99,7 @@ http://az.com/review_1 | found_helpful | 180
 "" | verified_purchase | true
 "" | text | I purchased this to add wireless connectivity to my Raspberry Pi [...]
 
-_subject is not specifying a new property of the review, it's defining which review we are talking about. You might think it's reasonable to think of the URI of a review as being one of its properties, but this view of things breaks down quickly and will get in the way of your understanding of RDF.
+The essential idea is that _subject is not specifying a new property of the review, instead it's defining which review we are talking about.
 
 The key ideas that make RDF different from ordinary Javascript objects are these.
 
