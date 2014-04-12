@@ -141,27 +141,27 @@ If the representation of a collection only contains the URLs of the collection's
 ```json
 [
     {
-        "_subject": "http://az.com/review_1",
-        "found_helpful" : 180,
-        "found_helpful_or_not" :192,
-        "stars" : 4,
-        "title" : "Good little Wifi Adapter",
-        "reviewer" : "http://az.com/reviewer_1",
-        "reviewOf" : "http://az.com/product_1",
-        "verified_purchase" : true,
-        "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
+    "_subject": "http://az.com/review_1",
+    "found_helpful" : 180,
+    "found_helpful_or_not" :192,
+    "stars" : 4,
+    "title" : "Good little Wifi Adapter",
+    "reviewer" : "http://az.com/reviewer_1",
+    "reviewOf" : "http://az.com/product_1",
+    "verified_purchase" : true,
+    "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
     },
 
     {
-        "_subject": "http://az.com/review_2",
-        "found_helpful" : 72,
-        "found_helpful_or_not" :77,
-        "stars" : 5,
-        "title" : "great little product for price!",
-        "reviewer" : "http://az.com/reviewer_2",
-        "reviewOf" : "http://az.com/product_1",
-        "verified_purchase" : true,
-        "text" : "I was amazed at how tiny it is! [...]"
+    "_subject": "http://az.com/review_2",
+    "found_helpful" : 72,
+    "found_helpful_or_not" :77,
+    "stars" : 5,
+    "title" : "great little product for price!",
+    "reviewer" : "http://az.com/reviewer_2",
+    "reviewOf" : "http://az.com/product_1",
+    "verified_purchase" : true,
+    "text" : "I was amazed at how tiny it is! [...]"
     },
 
     ...
@@ -199,15 +199,15 @@ representation, it must mean that they are members of the collection. Since we d
     "_subject" : "http://az.com/product_1/reviews",
     "member" : [
         {
-            "_subject": "http://az.com/review_1",
-            "found_helpful" : 180,
-            "found_helpful_or_not" :192,
-            "stars" : 4,
-            "title" : "Good little Wifi Adapter",
-            "reviewer" : "http://az.com/reviewer_1",
-            "reviewOf" : "http://az.com/product_1",
-            "verified_purchase" : true,
-            "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
+        "_subject": "http://az.com/review_1",
+        "found_helpful" : 180,
+        "found_helpful_or_not" :192,
+        "stars" : 4,
+        "title" : "Good little Wifi Adapter",
+        "reviewer" : "http://az.com/reviewer_1",
+        "reviewOf" : "http://az.com/product_1",
+        "verified_purchase" : true,
+        "text" : "I purchased this to add wireless connectivity to my Raspberry Pi [...]"
         },
 
         {
@@ -239,7 +239,7 @@ Now we have triples that declare explicitly which resources are the members rath
 
 *Note that the _subject JSON property of the reviews is playing double-duty here - it is defining the subject of the property-values within the nested JSON objects for the reviews, and it is defining the values of the 'member' property for the outer JSON object that represents the collection.*
 
-In this example, we forced the programmer to complicate the representation of the collection with an extra level of nesting. However, it's quite likely that she would have needed to be done anyway. Suppose for example, that we decide to record other information for the collection, like the time of the last update, or the number of entries - there are many plausible property values for a collection. The simplest way of adding these properties is to organize the data the way we have shown.
+In this example, we forced the programmer to complicate the representation of the collection with an extra level of nesting. However, it's quite likely that she would have needed to do this anyway. Suppose for example, that we decide to record other information for the collection, like the time of the last update, or the number of entries - there are many plausible property values for a collection. The simplest way of adding these properties is to organize the data the way we have shown.
 
 Hopefully we have convinced you that our conversion to the RDF data model has preserved the simplicity and intuitiveness of the JSON a programmer originally came up with and that the changes we imposed were pretty desirable ones anyway.
 
@@ -252,12 +252,12 @@ Here are a couple of examples that will show you that even though RDF is very si
 ```json
 [
     {
-        "_subject": "http://martin-nally.name",
-        "givenName" : "Martin"
+    "_subject": "http://martin-nally.name",
+    "givenName" : "Martin"
     },
     {
-        "_subject": "http://martin-nally.name",
-        "familyName" : "Nally"
+    "_subject": "http://martin-nally.name",
+    "familyName" : "Nally"
     }
 ]
 ```
@@ -314,7 +314,7 @@ http://az.com/product_1 | reviewedIn | http://az.com/review_1
 
 All we did was reverse the direction of the triple - instead of saying "review_1 is a review of product_1", we reversed it to say "product_1 is reviewed in review_1". This information is still held in the representation of the review, not the product, and the information is entirely equivalent - all we did was change the way we stated it.
 
-Although this change was trivial and inconsequential at the RDF level, it is now more complicated to put this information back into a JSON format - try it. *Hint - the representation of each review will become more complex - you will need two JSON objects instead of one to hold the information, but - surprisingly - the representation of the collection http://az.com/product_1/reviews becomes simpler - we no longer have to invent membership triples.*
+Although this change was trivial and inconsequential at the RDF level, it is now more complicated to put this information back into a JSON format - try it. *Hint - the structure of each review will become more complex - you will need two JSON objects instead of one to hold the information, but - surprisingly - the structure of the collection http://az.com/product_1/reviews becomes simpler - we no longer have to invent membership triples.*
 
 RDF also allows us to correct a conceptual problem with the data in the original example. The properties 'found_helpful' and 'found_helpful_or_not' are clearly properties of the review - they are trying to indicate how good the review is. However 'stars' is not a property of the review at all - it's trying to say how good the product is, not how good the review is. As humans who speak English, we can use common sense to figure this out, but a computer (other than IBM's Watson, perhaps) can't figure it out, and if the example had been done in a language I didn't know, I couldn't figure it out either. RDF gives us an easy way to correct this, by changing the table for the review to this:
 
