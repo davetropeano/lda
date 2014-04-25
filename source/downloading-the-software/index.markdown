@@ -6,6 +6,19 @@ comments: true
 sharing: true
 footer: true
 ---
+```
+
+NOTE FOR OSX USERS:
+
+There is a bug in VirtualBox that can prevent your host networking port mapping from working.
+
+Worse, it can seem like everything is set up right when you look at the VirtualBox admin windows but you'll still get 503 errors from the
+webservers.
+
+You *have to* follow the steps in "Note 1" below (scroll to the bottom of the doc). If you start getting 503 server errors again just go through the steps again.
+
+```
+
 The easiest way to get started with LDA is to download the framework from github as follows:
 
 1. Create a working directory:
@@ -44,7 +57,7 @@ Before you can do much with the LDA framework, you will need one or both of thes
 ### Starting MongoDB
 
 If you are getting started with LDA and just want to follow along with the
-[Todo Sample Tutorial](/developing-lda-applications/index.html), the fastest way to 
+[Todo Sample Tutorial](/developing-lda-applications/index.html), the fastest way to
 get set up is to simply go to the [MongoDB download page](https://www.mongodb.org/downloads)
 and download the appropriate version for your OS.
 
@@ -56,13 +69,13 @@ mongod
 ```
 
 At this point, MonoDB should be running and listening on its default host and port (localhost:27017).
-You should now be able to run the 'Todo Sample' in the 
+You should now be able to run the 'Todo Sample' in the
 [lda-examples](https://github.com/ld4apps/lda-examples) repository.
 
 ### Using Vagrant to start MongoDB and Nginx
 
 If you plan to do more with LDA (for example, run all the examples and start to play with it
-yourself), rather than installing and running MongoDB, the 
+yourself), rather than installing and running MongoDB, the
 [lda-examples](https://github.com/ld4apps/lda-examples) repository includes
 a Vagrantfile that can be used to start a MongoDB server as well as a properly configured
 Nginx reverse proxy server.

@@ -25,9 +25,8 @@ tbody tr:nth-child(odd) {
 }
 
 * + table th {
-  border-style: solid;
+  border: 1px solid #e7e3e7;
   font-weight: bold;
-  background:  url("/images/noise.png?1330434582") repeat scroll left top #F7F3F7;
 }
 
 * + table th[align="left"], * + table td[align="left"] {
