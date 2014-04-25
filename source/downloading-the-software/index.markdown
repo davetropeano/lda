@@ -6,18 +6,13 @@ comments: true
 sharing: true
 footer: true
 ---
-```
-
-NOTE FOR OSX USERS:
-
-There is a bug in VirtualBox that can prevent your host networking port mapping from working.
-
-Worse, it can seem like everything is set up right when you look at the VirtualBox admin windows but you'll still get 503 errors from the
-webservers.
-
-You *have to* follow the steps in "Note 1" below (scroll to the bottom of the doc). If you start getting 503 server errors again just go through the steps again.
-
-```
+> NOTE FOR OSX USERS:
+>
+> There is a bug in VirtualBox that can prevent your host networking port mapping from working.
+>
+> Worse, it can seem like everything is set up right when you look at the VirtualBox admin windows but you'll still get 503 errors from the webservers.
+>
+> You *have to* follow the steps in "Note 1" below (scroll to the bottom of the doc). If you start getting 503 server errors again just go through the steps again.
 
 The easiest way to get started with LDA is to download the framework from github as follows:
 
