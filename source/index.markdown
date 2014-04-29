@@ -38,8 +38,8 @@ and server applications that expose all data as hypertext-linked resources. The 
 framework provides server-side and a client-side components that make it easy to
 create applications that follow exactly that pattern.
 
-In addition to using long-standing technologies like HTML and RDF, LDA implements (parts of) newer specifications like the 
-[Linked Data Platform](http://www.w3.org/TR/ldp/).
+LDA implements (parts of) newer specifications like the 
+[Linked Data Platform](http://www.w3.org/TR/ldp/) in addition to using long-standing technologies like HTML and RDF.
 
 The server-side component is written in Python,
 about 75% of which would need to be ported to other languages to support application development in
