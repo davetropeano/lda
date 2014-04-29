@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 LDA is a light-weight framework that helps developers design and implement integrated
-systems - for example web-sites - that are composed of multiple applications and can be easily deployed
+systems - for example websites - that are composed of multiple applications and can be easily deployed
 on clouds.
 
 LDA helps you implement applications, but LDA's primary purpose is not implementing individual applications - there are
@@ -32,7 +32,7 @@ networking sites, government sites, news sites and so on.
 The basic idea of Linked Data is that if you just substitute a data model 
 ([RDF](/what-is-this-rdf-thing/index.html)) for HTML and otherwise
 'make like the world-wide web', then applications can achieve the same sort of easy and
-limitless integration of data that we see for user interface in the HTML web.
+limitless integration of UI, data and function that we see for pages in the HTML web.
 For this to work, we need to implement client applications that 'make like a browser'
 and server applications that expose all data as hypertext-linked resources. The LDA
 framework provides server-side and a client-side components that make it easy to
