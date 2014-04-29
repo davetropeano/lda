@@ -11,10 +11,12 @@ systems - for example web-sites - that are composed of multiple applications and
 on clouds.
 
 LDA helps you implement applications, but LDA's primary purpose is not implementing individual applications - there are
-lots of technologies for that - rather LDA helps implement coherent systems made up of
+lots of technologies for that. Rather, LDA helps implement coherent systems - for example large websites - made up of
 multiple applications that talk to each other. LDA applications are system components that communicate entirely through HTTP/REST interfaces.
 Two other common approaches for integrating applications, the 'central repository' approach and the one that in recent years
 has come to be called 'SOA', have problems that we believe the LDA approach overcomes.
+
+![](images/system.png)
 
 We have seen that the regular HTML web is an extraordinary integrator.
 By embedding links - usually HTML anchor tags - inside pages, HTML
